@@ -1,0 +1,137 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Kyriaki R">
+  <title>Developing DP Final Project - Shiny</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print" href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css">
+  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Developing DP Final Project - Shiny</h1>
+  <p class="author">
+Kyriaki R
+  </p>
+</div>
+<div id="project-instructions" class="slide section level2">
+<h1>Project Instructions</h1>
+<p>This peer assessed assignment has two parts. First, you will create a Shiny application and deploy it on Rstudio’s servers. Second, you will use Slidify or Rstudio Presenter to prepare a reproducible pitch presentation about your application.</p>
+<h3 id="your-shiny-application">Your Shiny Application</h3>
+<p>- Write a shiny application with associated supporting documentation. The documentation should be thought of as whatever a user will need to get started using your application.</p>
+<p>- Deploy the application on Rstudio’s shiny server</p>
+<p>- Share the application link by pasting it into the provided text box</p>
+<p>- Share your server.R and ui.R code on github</p>
+<p>The application must include the following:</p>
+<p>- Some form of input (widget: textbox, radio button, checkbox, …)</p>
+<p>- Some operation on the ui input in sever.R</p>
+<p>- Some reactive output displayed as a result of server calculations</p>
+<p>- You must also include enough documentation so that a novice user could use your application.</p>
+<p>The documentation should be at the Shiny website itself. Do not post to an external link.</p>
+</div>
+<div id="preparation" class="slide section level2">
+<h1>Preparation</h1>
+<p>First we need to make a new project in R, which will basically be a new working directory (wd). Then, we download the packages we will need.</p>
+<div class="cell">
+
+</div>
+<p>Then the data. We will use the rds “counties”, which includes all USA counties and offers information on the population percentages in each county. The reason for choosing this file is because I had already worked in previous projects with the “countries.rds” and I was already familiar with the content and the project I would do.</p>
+<p>At this point, I must include that at the very beginning I made the mistake of adding an extra “r” in “countries” and when I realised it it was so late that I decided to change everything to “countries”.</p>
+<p>*Note* : I wanted to do this project with a european map, but I couldn’t find a proper file online, so I went back to the USA map.</p>
+<p>So we download the “counties.rds” file and put it in our wd.</p>
+<div class="cell">
+
+</div>
+<p>Of course, we need to familiarize ourselves with our data, so we use commands like head(), summary() and dim() to see what our data consists of.</p>
+</div>
+<div id="basic-procedure" class="slide section level2">
+<h1>Basic procedure</h1>
+<p>The next step is to set the code source that will assist us in creating the app. For this step we will use the already set code of helpers.R which is available online. After we download it, we move it to our wd.</p>
+<div class="cell">
+
+</div>
+<p>We will need to see the percentages on the map, so we will use the percentage_map call in R for that.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="Developing-DP-Final-Project---Shiny_files/figure-slidy/unnamed-chunk-4-1.png" width="912"></p>
+</div>
+</div>
+</div>
+<div id="ui-object-and-server" class="slide section level2">
+<h1>UI object and server</h1>
+<p>With the following calls, we basically adjust and control the layout and function of our project.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+</div>
+<div id="final-call-and-results" class="slide section level2">
+<h1>Final Call and Results</h1>
+<p>Normally up until that moment, you will have corrected possible errors that may have occurred during the procedure. If not, after the following command, the final errors to be corrected will appear.</p>
+<p>It is time to see our project in the flesh!</p>
+<div class="cell">
+<div class="cell-output-display">
+<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</div>
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+
+
+</body></html>
